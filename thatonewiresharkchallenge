@@ -1,0 +1,10 @@
+from scapy.all import rdpcap
+
+def parse_usb_keystrokes(pcap_file):
+    packets = rdpcap(pcap_file)
+    for packet in packets:
+        if packet.haslayer('USBHID'):
+            data = bytes(packet['USBHID'].data)
+            print(data)
+
+parse_usb_keystrokes("YouEsBee.pcap")
